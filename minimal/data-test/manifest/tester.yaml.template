@@ -6,7 +6,7 @@ metadata:
   labels:
     app: "morfius-tutor-test"
   annotations:
-    marketplace.cloud.google.com/verification: test
+    marketplace.cloud.google.com/verification:test
 spec:
   replicas: 1
   selector:
