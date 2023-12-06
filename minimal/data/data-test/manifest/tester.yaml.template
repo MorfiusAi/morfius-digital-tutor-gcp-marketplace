@@ -1,6 +1,6 @@
 ---
 apiVersion: "apps/v1"
-kind: "Pod"
+kind: Pod
 metadata:
   name: "morfius-tutor-test"
   labels:
