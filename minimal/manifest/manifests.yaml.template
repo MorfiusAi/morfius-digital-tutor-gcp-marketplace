@@ -130,7 +130,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: $volume-size
+      storage: 100Mi
   hostPath:
     path: /data/db
 ---
