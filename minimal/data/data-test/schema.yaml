@@ -1,0 +1,4 @@
+properties:
+  image:
+    default: us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-test:v5
+    type: string
