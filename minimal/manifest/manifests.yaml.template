@@ -125,6 +125,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mongo-pvc
+  namespace: "$namespace"
 spec:
   accessModes:
     - ReadWriteOnce
@@ -136,7 +137,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "morfius-tutor-svc"
-  namespace: "default"
+  namespace: "$namespace"
   labels:
     app: "morfius-tutor"
 spec:
