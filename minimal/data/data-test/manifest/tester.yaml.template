@@ -1,6 +1,6 @@
 ---
 apiVersion: "apps/v1"
-kind: "Deployment"
+kind: "Pod"
 metadata:
   name: "morfius-tutor-test"
   labels:
@@ -8,26 +8,17 @@ metadata:
   annotations:
     marketplace.cloud.google.com/verification: test
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: "morfius-tutor-test"
-  template:
-    metadata:
-      labels:
-        app: "morfius-tutor-test"
-    spec:
-      containers:
-      - name: "test"
-        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-test:v4"
-        env:
-        - name: "URL"
-          valueFrom:
-            configMapKeyRef:
-              key: "URL"
-              name: "morfius-tutor-config-ygfz"
-        - name: "uri"
-          valueFrom:
-            configMapKeyRef:
-              key: "uri"
-              name: "morfius-tutor-config-ygfz"
+    containers:
+    - name: "test"
+      image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-test:v4"
+      env:
+      - name: "URL"
+        valueFrom:
+          configMapKeyRef:
+            key: "URL"
+            name: "morfius-tutor-config-ygfz"
+      - name: "uri"
+        valueFrom:
+          configMapKeyRef:
+            key: "uri"
+            name: "morfius-tutor-config-ygfz"
