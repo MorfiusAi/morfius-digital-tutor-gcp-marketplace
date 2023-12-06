@@ -28,7 +28,7 @@ properties:
     type: string
     title: Persistant Volume Size
     Description: The Size of the Persistent Volume
-  openAIAPIkey:
+  openAIAPIKey:
     type: string
     title: Open AI Api Key
     Description: API Key provided by OpenAI
