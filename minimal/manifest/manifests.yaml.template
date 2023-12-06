@@ -131,8 +131,6 @@ spec:
   resources:
     requests:
       storage: 100Mi
-  hostPath:
-    path: /data/db
 ---
 apiVersion: "v1"
 kind: "Service"
