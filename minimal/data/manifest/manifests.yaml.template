@@ -45,7 +45,7 @@ spec:
           claimName: morfius-pvc
       containers:
       - name: "morfius-tutor-backend"
-        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-backend:v1"
+        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-backend:v5"
         command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:8081", "app:app", "--timeout", "1800"]
         env:
         - name: "db"
@@ -115,7 +115,7 @@ spec:
               key: "MONGO_INITDB_DATABASE"
               name: "morfius-tutor-config-ygfz"
       - name: "morfius-tutor-ui"
-        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-ui:kube"
+        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-ui:v1"
         imagePullPolicy: "Always"
       - name: "nginx"
         image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-server:latest"

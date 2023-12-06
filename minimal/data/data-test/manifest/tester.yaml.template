@@ -10,7 +10,7 @@ metadata:
 spec:
     containers:
     - name: "test"
-      image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-test:v4"
+      image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-test:v5"
       env:
       - name: "URL"
         valueFrom:
