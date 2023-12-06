@@ -3,7 +3,6 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "morfius-tutor-test"
-  namespace: "$namespace"
   labels:
     app: "morfius-tutor-test"
   annotations:
