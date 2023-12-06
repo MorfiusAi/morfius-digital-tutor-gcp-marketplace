@@ -118,14 +118,13 @@ spec:
         image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-ui:kube"
         imagePullPolicy: "Always"
       - name: "nginx"
-        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-server"
+        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-server:latest"
         imagePullPolicy: "Always"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: morfius-pvc
-  namespace: "$namespace"
 spec:
   accessModes:
     - ReadWriteOnce
