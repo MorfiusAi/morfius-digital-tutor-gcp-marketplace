@@ -24,7 +24,7 @@ properties:
     type: integer
     title: Nginx Replica Count
     description: The number of nginx replicas to deploy
-  volume-size:
+  volumeSize:
     type: string
     title: Persistant Volume Size
     Description: The Size of the Persistent Volume
@@ -33,4 +33,4 @@ required:
 - name
 - namespace
 - replicas
-- volume-size
+- volumeSize
