@@ -8,7 +8,7 @@ metadata:
     app: "morfius-tutor"
 data:
   db: "localhost"
-  OPENAI_API_KEY: "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"
+  OPENAI_API_KEY: "$openAIAPIKey"
   MONGO_INITDB_ROOT_USERNAME: "morfius"
   MONGO_INITDB_ROOT_PASSWORD: "Morfius1234"
   MONGO_INITDB_DATABASE: "auth"
@@ -42,7 +42,7 @@ spec:
       volumes:
       - name: mongo-persistent-storage
         persistentVolumeClaim:
-          claimName: mongo-pvc
+          claimName: morfius-pvc
       containers:
       - name: "morfius-tutor-backend"
         image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-backend:v1"
@@ -124,7 +124,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-pvc
+  name: morfius-pvc
   namespace: "$namespace"
 spec:
   accessModes:
