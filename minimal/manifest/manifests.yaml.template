@@ -1,0 +1,165 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "morfius-tutor-config-ygfz"
+  namespace: "$namespace"
+  labels:
+    app: "morfius-tutor"
+data:
+  db: "localhost"
+  OPENAI_API_KEY: "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"
+  MONGO_INITDB_ROOT_USERNAME: "morfius"
+  MONGO_INITDB_ROOT_PASSWORD: "Morfius1234"
+  MONGO_INITDB_DATABASE: "auth"
+  GOOGLE_APPLICATION_CREDENTIALS: "/app/digital-tutor-398609-94a8e84c738b.json"
+  DB_NAME: "localhost"
+  GCP_VIDEO_PROJECT_ID: digital-tutor-398609
+  GCP_CREDENTIALS_PATH: /app/morfius-platform-402907-50044ce985c3.json
+  GCP_BUCKET_ID: morfiusstorage
+  GCP_PROJECT_ID: morfius-platform-402907
+  URL: http://morfius-tutor-svc
+  CLOUD_STORAGE_KEY: gcp
+  uri: "mongodb://morfius:Morfius1234@morfius-tutor-svc:27017/?authMechanism=DEFAULT"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "morfius-tutor"
+  namespace: "$namespace"
+  labels:
+    app: "morfius-tutor"
+spec:
+  replicas: $replicas
+  selector:
+    matchLabels:
+      app: "morfius-tutor"
+  template:
+    metadata:
+      labels:
+        app: "morfius-tutor"
+    spec:
+      volumes:
+      - name: mongo-persistent-storage
+        persistentVolumeClaim:
+          claimName: mongo-pvc
+      containers:
+      - name: "morfius-tutor-backend"
+        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-backend:v1"
+        command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:8081", "app:app", "--timeout", "1800"]
+        env:
+        - name: "db"
+          valueFrom:
+            configMapKeyRef:
+              key: "db"
+              name: "morfius-tutor-config-ygfz"
+        - name: "URL"
+          valueFrom:
+            configMapKeyRef:
+              key: "URL"
+              name: "morfius-tutor-config-ygfz"
+        - name: "OPENAI_API_KEY"
+          valueFrom:
+            configMapKeyRef:
+              key: "OPENAI_API_KEY"
+              name: "morfius-tutor-config-ygfz"
+        - name: "GOOGLE_APPLICATION_CREDENTIALS"
+          valueFrom:
+            configMapKeyRef:
+              key: "GOOGLE_APPLICATION_CREDENTIALS"
+              name: "morfius-tutor-config-ygfz"
+        - name: "GCP_VIDEO_PROJECT_ID"
+          valueFrom:
+            configMapKeyRef:
+              key: "GCP_VIDEO_PROJECT_ID"
+              name: "morfius-tutor-config-ygfz"
+        - name: "GCP_CREDENTIALS_PATH"
+          valueFrom:
+            configMapKeyRef:
+              key: "GCP_CREDENTIALS_PATH"
+              name: "morfius-tutor-config-ygfz"
+        - name: "GCP_BUCKET_ID"
+          valueFrom:
+            configMapKeyRef:
+              key: "GCP_BUCKET_ID"
+              name: "morfius-tutor-config-ygfz"
+        - name: "GCP_PROJECT_ID"
+          valueFrom:
+            configMapKeyRef:
+              key: "GCP_PROJECT_ID"
+              name: "morfius-tutor-config-ygfz"
+        - name: "CLOUD_STORAGE_KEY"
+          valueFrom:
+            configMapKeyRef:
+              key: "CLOUD_STORAGE_KEY"
+              name: "morfius-tutor-config-ygfz"
+      - name: "morfius-db"
+        image: "mongo:jammy"
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+        env:
+        - name: "MONGO_INITDB_ROOT_USERNAME"
+          valueFrom:
+            configMapKeyRef:
+              key: "MONGO_INITDB_ROOT_USERNAME"
+              name: "morfius-tutor-config-ygfz"
+        - name: "MONGO_INITDB_ROOT_PASSWORD"
+          valueFrom:
+            configMapKeyRef:
+              key: "MONGO_INITDB_ROOT_PASSWORD"
+              name: "morfius-tutor-config-ygfz"
+        - name: "MONGO_INITDB_DATABASE"
+          valueFrom:
+            configMapKeyRef:
+              key: "MONGO_INITDB_DATABASE"
+              name: "morfius-tutor-config-ygfz"
+      - name: "morfius-tutor-ui"
+        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-ui:kube"
+        imagePullPolicy: "Always"
+      - name: "nginx"
+        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-server"
+        imagePullPolicy: "Always"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: $volume-size
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "morfius-tutor-svc"
+  namespace: "default"
+  labels:
+    app: "morfius-tutor"
+spec:
+  ports:
+  - name: "http"
+    port: 80
+    targetPort: 80
+  - name: "https"
+    port: 443
+    targetPort: 443
+  - name: "ui"
+    protocol: "TCP"
+    port: 3000
+    targetPort: 3000
+  - name: "pinecone"
+    protocol: "TCP"
+    port: 8081
+    targetPort: 8081
+  - name: "db"
+    protocol: "TCP"
+    port: 27017
+    targetPort: 27017
+  selector:
+    app: "morfius-tutor"
+  type: "LoadBalancer"
+  loadBalancerIP: ""
