@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: "${name}"
   annotations:
-    marketplace.cloud.google.com/verification: test
+    test
 spec:
     containers:
     - name: "test"
