@@ -2,15 +2,15 @@
 apiVersion: "apps/v1"
 kind: Pod
 metadata:
-  name: "morfius-tutor-test"
+  name: "${name}-tester"
   labels:
-    app: "morfius-tutor-test"
+    app.kubernetes.io/name: "${name}"
   annotations:
     marketplace.cloud.google.com/verification: test
 spec:
     containers:
     - name: "test"
-      image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-test:v5"
+      image: "$testerImage"
       env:
       - name: "URL"
         valueFrom:
