@@ -16,9 +16,19 @@ spec:
         valueFrom:
           configMapKeyRef:
             key: "URL"
-            name: "morfius-tutor-config-ygfz"
+            name: "morfius-tutor-config-test"
       - name: "uri"
         valueFrom:
           configMapKeyRef:
             key: "uri"
-            name: "morfius-tutor-config-ygfz"
+            name: "morfius-tutor-config-test"
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "morfius-tutor-config-test"
+  labels:
+    app: "morfius-tutor"
+data:
+  URL: http://morfius-tutor-svc
+  uri: "mongodb://morfius:Morfius1234@morfius-tutor-svc:27017/?authMechanism=DEFAULT"
