@@ -1,7 +1,7 @@
 properties:
   testerImage:
-    default: gcr.io/morfius-platform-402907/morfius-tutor-test:v1
     type: string
+    default: gcr.io/morfius-platform-402907/morfius-tutor-test:v2
   replicas:
     type: integer
     default: 1
