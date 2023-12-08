@@ -1,4 +1,4 @@
-# morfius-digital-tutor-gcp-marketplace
+# Morfius Digital Tutor
 
 # Overview
 
