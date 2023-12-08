@@ -9,33 +9,33 @@ x-google-marketplace:
   images:
     morfiustutorui:
       properties:
-        imageMoriusTutorUiFull:
+        imagemoriustutoruiFull:
           type: FULL
-        imageMorfiusTutorUiRegistry:
+        imagemorfiustutoruiRegistry:
           type: REGISTRY
-        imageMorfiusTutorUiRepo:
+        imagemorfiustutoruiRepo:
           type: REPO_WITHOUT_REGISTRY
-        imageMorfiusTutorUiTag:
+        imagemorfiustutoruiTag:
           type: TAG
     morfiustutorbackend:
       properties:
-        imageMoriusTutorBackendFull:
+        imagemoriustutorbackendFull:
           type: FULL
-        imageMorfiusTutorBackendRegistry:
+        imagemorfiustutorbackendRegistry:
           type: REGISTRY
-        imageMorfiusTutorBackendRepo:
+        imagemorfiustutorbackendRepo:
           type: REPO_WITHOUT_REGISTRY
-        imageMorfiusTutorBackendTag:
+        imagemorfiustutorbackendTag:
           type: TAG
     morfiustutorserver:
       properties:
-        imageMoriusTutorServerFull:
+        imagemoriustutorserverFull:
           type: FULL
-        imageMorfiusTutorServerRegistry:
+        imagemorfiustutorserverRegistry:
           type: REGISTRY
-        imageMorfiusTutorServerRepo:
+        imagemorfiustutorserverRepo:
           type: REPO_WITHOUT_REGISTRY
-        imageMorfiusTutorServerTag:
+        imagemorfiustutorserverTag:
           type: TAG
 
 properties:

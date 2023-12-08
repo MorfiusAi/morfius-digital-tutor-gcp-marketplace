@@ -45,7 +45,7 @@ spec:
           claimName: morfius-pvc
       containers:
       - name: "morfius-tutor-backend"
-        image: $imageMoriusTutorBackendFull
+        image: $imagemorfiustutorbackendRegistry/$imagemorfiustutorbackendRepo:$imagemorfiustutorbackendTag
         command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:8081", "app:app", "--timeout", "1800"]
         env:
         - name: "db"
@@ -115,10 +115,10 @@ spec:
               key: "MONGO_INITDB_DATABASE"
               name: "morfius-tutor-config-ygfz"
       - name: "morfius-tutor-ui"
-        image: $imageMoriusTutorUiFull
+        image: $imagemorfiustutoruiRegistry/$imagemorfiustutoruiRepo:$imagemorfiustutoruiTag
         imagePullPolicy: "Always"
       - name: "nginx"
-        image: $imageMoriusTutorServerFull
+        image: $imagemorfiustutorserverRegistry/$imagemorfiustutorserverRepo:$imagemorfiustutorserverTag
         imagePullPolicy: "Always"
 ---
 apiVersion: v1
