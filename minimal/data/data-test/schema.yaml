@@ -1,9 +1,7 @@
 properties:
   testerImage:
-    default: $TesterImage
+    default: gcr.io/morfius-platform-402907/morfius-tutor-test:v1
     type: string
-    x-google-property:
-      type: IMAGE
   replicas:
     type: integer
     default: 1
