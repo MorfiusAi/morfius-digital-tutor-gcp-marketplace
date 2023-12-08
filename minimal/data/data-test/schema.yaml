@@ -4,16 +4,10 @@ properties:
     type: string
   replicas:
     type: integer
-    title: Replica count
-    description: The number of tutor replicas to deploy
     default: 1
   volumeSize:
     type: string
-    title: Persistant Volume Size
-    Description: The Size of the Persistent Volume
     default: 100Mi
   openAIAPIKey:
     type: string
-    title: Open AI Api Key
-    Description: API Key provided by OpenAI
     default: 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
