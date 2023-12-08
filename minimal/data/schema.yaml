@@ -2,14 +2,11 @@ x-google-marketplace:
   schemaVersion: v2
 
   applicationApiVersion: v1beta1
-  # The published version is required and MUST match the tag
-  # of the deployer image
-  publishedVersion: '0.1.1'
+  publishedVersion: "0.1.1"
   publishedVersionMetadata:
     releaseNote: >-
       A first release.
-  # The images property will be filled in during part 2
-  images: 
+  images:
     morfiusTutorUi:
       properties:
         imageMoriusTutorUiFull:
@@ -19,7 +16,7 @@ x-google-marketplace:
         imageMorfiusTutorUiRepo:
           type: REPO_WITHOUT_REGISTRY
         imageMorfiusTutorUiTag:
-          type: Tag
+          type: TAG
     morfiusTutorBackend:
       properties:
         imageMoriusTutorBackendFull:
@@ -29,7 +26,7 @@ x-google-marketplace:
         imageMorfiusTutorBackendRepo:
           type: REPO_WITHOUT_REGISTRY
         imageMorfiusTutorBackendTag:
-          type: Tag
+          type: TAG
     morfiusTutorServer:
       properties:
         imageMoriusTutorServerFull:
@@ -39,8 +36,7 @@ x-google-marketplace:
         imageMorfiusTutorServerRepo:
           type: REPO_WITHOUT_REGISTRY
         imageMorfiusTutorServerTag:
-          type: Tag
-
+          type: TAG
 
 properties:
   name:
@@ -65,7 +61,7 @@ properties:
     Description: API Key provided by OpenAI
 
 required:
-- name
-- namespace
-- replicas
-- volumeSize
+  - name
+  - namespace
+  - replicas
+  - volumeSize
