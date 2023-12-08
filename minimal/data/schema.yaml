@@ -20,10 +20,10 @@ properties:
     type: string
     x-google-marketplace:
       type: NAMESPACE
-  myReportingSecret:
-    type: string
-    x-google-marketplace:
-      type: REPORTING_SECRET
+  # myReportingSecret:
+  #   type: string
+  #   x-google-marketplace:
+  #     type: REPORTING_SECRET
   # imageUbbagent:
   #   type: string
   #   default: gcr.io/cloud-marketplace-tools/metering/ubbagent:latest
