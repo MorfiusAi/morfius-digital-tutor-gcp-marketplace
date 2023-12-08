@@ -166,7 +166,7 @@ spec:
           name: ubbagent-config
       containers:
       - name: "morfius-tutor-backend"
-        image: "gcr.io/morfius-platform-402907/morfius-tutor-backend:v1"
+        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-backend:v5"
         command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:8081", "app:app", "--timeout", "1800"]
         env:
         - name: "db"
@@ -241,26 +241,6 @@ spec:
       - name: "nginx"
         image: "gcr.io/morfius-platform-402907/morfius-tutor-server:v1"
         imagePullPolicy: "Always"
-      - name: ubbagent
-        image: $imageUbbagent
-        env:
-        - name: AGENT_CONFIG_FILE
-          value: "/etc/ubbagent/config.yaml"
-        - name: AGENT_LOCAL_PORT
-          value: "4567"
-        - name: AGENT_ENCODED_KEY
-          valueFrom:
-            secretKeyRef:
-              name: $reportingSecret
-              key: reporting-key
-        - name: AGENT_CONSUMER_ID
-          valueFrom:
-            secretKeyRef:
-              name: $reportingSecret
-              key: consumer-id
-        volumeMounts:
-        - name: ubbagent-config
-          mountPath: /etc/ubbagent
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

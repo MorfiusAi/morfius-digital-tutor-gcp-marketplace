@@ -24,9 +24,9 @@ properties:
     type: string
     x-google-marketplace:
       type: REPORTING_SECRET
-  imageUbbagent:
-    type: string
-    default: gcr.io/cloud-marketplace-tools/metering/ubbagent:latest
+  # imageUbbagent:
+  #   type: string
+  #   default: gcr.io/cloud-marketplace-tools/metering/ubbagent:latest
   replicas:
     type: integer
     title: Nginx Replica Count
