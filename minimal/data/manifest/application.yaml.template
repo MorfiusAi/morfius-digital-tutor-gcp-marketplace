@@ -4,7 +4,7 @@ metadata:
   name: "$name"
   namespace: "$namespace"
   annotations:
-    marketplace.cloud.google.com/deploy-info: '{"partner_id": "partner", "product_id": "nginx", "partner_name": "Partner"}'
+    marketplace.cloud.google.com/deploy-info: '{"partner_id": "partner", "product_id": "digital-tutor", "partner_name": "Partner"}'
   labels:
     app.kubernetes.io/name: "$name"
 spec:
@@ -20,3 +20,5 @@ spec:
     kind: Deployment
   - group: ''
     kind: Service
+  - group: v1
+    kind: PersistentVolumeClaim

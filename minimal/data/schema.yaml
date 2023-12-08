@@ -9,7 +9,38 @@ x-google-marketplace:
     releaseNote: >-
       A first release.
   # The images property will be filled in during part 2
-  images: {}
+  images: 
+    morfiusTutorUi:
+      properties:
+        imageMoriusTutorUiFull:
+          type: FULL
+        imageMorfiusTutorUiRegistry:
+          type: REGISTRY
+        imageMorfiusTutorUiRepo:
+          type: REPO_WITHOUT_REGISTRY
+        imageMorfiusTutorUiTag:
+          type: Tag
+    morfiusTutorBackend:
+      properties:
+        imageMoriusTutorBackendFull:
+          type: FULL
+        imageMorfiusTutorBackendRegistry:
+          type: REGISTRY
+        imageMorfiusTutorBackendRepo:
+          type: REPO_WITHOUT_REGISTRY
+        imageMorfiusTutorBackendTag:
+          type: Tag
+    morfiusTutorServer:
+      properties:
+        imageMoriusTutorServerFull:
+          type: FULL
+        imageMorfiusTutorServerRegistry:
+          type: REGISTRY
+        imageMorfiusTutorServerRepo:
+          type: REPO_WITHOUT_REGISTRY
+        imageMorfiusTutorServerTag:
+          type: Tag
+
 
 properties:
   name:

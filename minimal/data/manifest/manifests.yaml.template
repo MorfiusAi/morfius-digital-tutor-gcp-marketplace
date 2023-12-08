@@ -43,12 +43,9 @@ spec:
       - name: mongo-persistent-storage
         persistentVolumeClaim:
           claimName: morfius-pvc
-      - name: ubbagent-config
-        configMap:
-          name: ubbagent-config
       containers:
       - name: "morfius-tutor-backend"
-        image: "us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-tutor-backend:v5"
+        image: $imageMorfiusTutorBackendRegistry/$imageMorfiusTutorBackendRepo:$imageMorfiusTutorBackendTag
         command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:8081", "app:app", "--timeout", "1800"]
         env:
         - name: "db"
@@ -118,10 +115,10 @@ spec:
               key: "MONGO_INITDB_DATABASE"
               name: "morfius-tutor-config-ygfz"
       - name: "morfius-tutor-ui"
-        image: "gcr.io/morfius-platform-402907/morfius-tutor-ui:v1"
+        image: $imageMorfiusTutorUiRegistry/$imageMorfiusTutorUiRepo:$imageMorfiusTutorUiTag
         imagePullPolicy: "Always"
       - name: "nginx"
-        image: "gcr.io/morfius-platform-402907/morfius-tutor-server:v1"
+        image: $imageMorfiusTutorServerRegistry/$imageMorfiusTutorServerRepo:$imageMorfiusTutorServerTag
         imagePullPolicy: "Always"
 ---
 apiVersion: v1
