@@ -1,9 +1,4 @@
 # morfius-digital-tutor-gcp-marketplace
-*This directory contains an example Kubernetes application (app) based on
-WordPress for the purpose of demonstrating app integration with
-Google Cloud Marketplace. **Not intended for actual use!***
-
-*Content below is intended as a template for end-user documentation.*
 
 # Overview
 
