@@ -8,6 +8,9 @@ properties:
   volumeSize:
     type: string
     default: 100Mi
-  openAIAPIKey:
+  dbUser:
     type: string
-    default: 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
+    default: morfius
+  dbPassword:
+    type: string
+    default: Morfius1234

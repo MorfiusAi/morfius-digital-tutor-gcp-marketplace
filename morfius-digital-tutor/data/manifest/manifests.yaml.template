@@ -11,8 +11,6 @@ data:
   MONGO_INITDB_ROOT_USERNAME: "$dbUser"
   MONGO_INITDB_ROOT_PASSWORD: "$dbPassword"
   MONGO_INITDB_DATABASE: "auth"
-  SUPER_USER: "$userEmail"
-  SUPER_USER_PASSWORD: "$userPassword"
   GOOGLE_APPLICATION_CREDENTIALS: "/app/digital-tutor-398609-94a8e84c738b.json"
   DB_NAME: "localhost"
   GCP_VIDEO_PROJECT_ID: digital-tutor-398609
@@ -177,16 +175,6 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: "db"
-              name: "$name-config-map"
-        - name: "SUPER_USER"
-          valueFrom:
-            configMapKeyRef:
-              key: "SUPER_USER"
-              name: "$name-config-map"
-        - name: "SUPER_USER_PASSWORD"
-          valueFrom:
-            configMapKeyRef:
-              key: "SUPER_USER_PASSWORD"
               name: "$name-config-map"
         - name: "URL"
           valueFrom:

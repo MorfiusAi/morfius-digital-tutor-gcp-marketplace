@@ -32,4 +32,4 @@ metadata:
     app: "morfius-tutor"
 data:
   URL: http://morfius-tutor-svc
-  uri: "mongodb://morfius:Morfius1234@morfius-tutor-svc:27017/?authMechanism=DEFAULT"
+  uri: "mongodb://$dbUser:$dbPassword@morfius-tutor-svc:27017/?authMechanism=DEFAULT"

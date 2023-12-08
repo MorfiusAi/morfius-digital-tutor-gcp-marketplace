@@ -79,6 +79,5 @@ required:
   - name
   - namespace
   - replicas
-  - userEmail
-  - userPassword
-  - openAIAPIKey
+  - dbUser
+  - dbPassword
