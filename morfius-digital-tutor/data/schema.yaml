@@ -2,10 +2,14 @@ x-google-marketplace:
   schemaVersion: v2
 
   applicationApiVersion: v1beta1
-  publishedVersion: "0.1.1"
+  publishedVersion: "1.0.0"
   publishedVersionMetadata:
     releaseNote: >-
-      A first release.
+      The Morfius Digital Tutor app enhances the educational experience by adapting approved curriculum into engaging and accessible resources and knowledge bases. 
+      It offers unique features like video transcription and translation, enabling teachers to cater to diverse student needs, including English Language Learners and those with visual or auditory impairments. 
+      Additionally, Digital Tutor provides powerful analytics for teachers and administrators to track student performance and engagement,
+      ensuring a more personalized and efficient learning process.
+      This personalized AI generative app is optimized for fast development, training, and low cost runtime, offering a secure environment for educational data.
   images:
     morfiustutorui:
       properties:
@@ -41,6 +45,7 @@ x-google-marketplace:
 properties:
   name:
     type: string
+    maxLength: 12
     x-google-marketplace:
       type: NAME
   namespace:
@@ -54,23 +59,26 @@ properties:
   imageUbbagent:
     type: string
     default: gcr.io/cloud-marketplace-tools/metering/ubbagent:latest
-    x-google-marketplace:
-      type: IMAGE
   replicas:
     type: integer
     title: Nginx Replica Count
     description: The number of nginx replicas to deploy
-  volumeSize:
+  dbUser:
     type: string
-    title: Persistant Volume Size
-    Description: The Size of the Persistent Volume
-  openAIAPIKey:
+    title: Database User
+    description: Enter your Database User
+  dbPassword:
     type: string
-    title: Open AI Api Key
-    Description: API Key provided by OpenAI
+    title: Database Password
+    description: Enter your Database Password
+    x-google-marketplace:
+      type: MASKED_FIELD
+
 
 required:
   - name
   - namespace
   - replicas
-  - volumeSize
+  - userEmail
+  - userPassword
+  - openAIAPIKey

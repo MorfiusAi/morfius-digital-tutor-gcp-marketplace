@@ -10,12 +10,11 @@ metadata:
 spec:
   descriptor:
     type: digital-tutor
-    version: '0.1.1'
+    version: '1.0.0'
   selector:
     matchLabels:
       app.kubernetes.io/name: "$name"
   componentKinds:
-  # The group is determined from the apiVersion: $GROUP_NAME/$VERSION
   - group: apps
     kind: Deployment
   - group: ''

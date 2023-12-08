@@ -2,25 +2,29 @@
 apiVersion: "v1"
 kind: "ConfigMap"
 metadata:
-  name: "morfius-tutor-config-ygfz"
+  name: "$name-config-map"
   namespace: "$namespace"
   labels:
-    app: "morfius-tutor"
+    app: "$name"
 data:
   db: "localhost"
-  OPENAI_API_KEY: "$openAIAPIKey"
-  MONGO_INITDB_ROOT_USERNAME: "morfius"
-  MONGO_INITDB_ROOT_PASSWORD: "Morfius1234"
+  MONGO_INITDB_ROOT_USERNAME: "$dbUser"
+  MONGO_INITDB_ROOT_PASSWORD: "$dbPassword"
   MONGO_INITDB_DATABASE: "auth"
+  SUPER_USER: "$userEmail"
+  SUPER_USER_PASSWORD: "$userPassword"
   GOOGLE_APPLICATION_CREDENTIALS: "/app/digital-tutor-398609-94a8e84c738b.json"
   DB_NAME: "localhost"
   GCP_VIDEO_PROJECT_ID: digital-tutor-398609
   GCP_CREDENTIALS_PATH: /app/morfius-platform-402907-50044ce985c3.json
   GCP_BUCKET_ID: morfiusstorage
   GCP_PROJECT_ID: morfius-platform-402907
-  URL: http://morfius-tutor-svc
+  URL: http://$name-svc
+  INDEX_NAME: "$name"
   CLOUD_STORAGE_KEY: gcp
-  uri: "mongodb://morfius:Morfius1234@morfius-tutor-svc:27017/?authMechanism=DEFAULT"
+  MONGO_USER: "$dbUser"
+  MONGO_PASSWORD: "$dbPassword"
+  uri: "mongodb://$dbUser:$dbPassword@$name-svc:27017/?authMechanism=DEFAULT"
   config.yaml: |
     # The identity section contains authentication information used
     # by the agent.
@@ -143,19 +147,19 @@ data:
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "morfius-tutor"
+  name: "$name"
   namespace: "$namespace"
   labels:
-    app: "morfius-tutor"
+    app: "$name"
 spec:
   replicas: $replicas
   selector:
     matchLabels:
-      app: "morfius-tutor"
+      app: "$name"
   template:
     metadata:
       labels:
-        app: "morfius-tutor"
+        app: "$name"
     spec:
       volumes:
       - name: mongo-persistent-storage
@@ -165,7 +169,7 @@ spec:
         configMap:
           name: ubbagent-config
       containers:
-      - name: "morfius-tutor-backend"
+      - name: "$name-backend"
         image: $imagemorfiustutorbackendRegistry/$imagemorfiustutorbackendRepo:$imagemorfiustutorbackendTag
         command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:8081", "app:app", "--timeout", "1800"]
         env:
@@ -173,47 +177,57 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: "db"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
+        - name: "SUPER_USER"
+          valueFrom:
+            configMapKeyRef:
+              key: "SUPER_USER"
+              name: "$name-config-map"
+        - name: "SUPER_USER_PASSWORD"
+          valueFrom:
+            configMapKeyRef:
+              key: "SUPER_USER_PASSWORD"
+              name: "$name-config-map"
         - name: "URL"
           valueFrom:
             configMapKeyRef:
               key: "URL"
-              name: "morfius-tutor-config-ygfz"
-        - name: "OPENAI_API_KEY"
+              name: "$name-config-map"
+        - name: "INDEX_NAME"
           valueFrom:
             configMapKeyRef:
-              key: "OPENAI_API_KEY"
-              name: "morfius-tutor-config-ygfz"
+              key: "INDEX_NAME"
+              name: "$name-config-map"
         - name: "GOOGLE_APPLICATION_CREDENTIALS"
           valueFrom:
             configMapKeyRef:
               key: "GOOGLE_APPLICATION_CREDENTIALS"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
         - name: "GCP_VIDEO_PROJECT_ID"
           valueFrom:
             configMapKeyRef:
               key: "GCP_VIDEO_PROJECT_ID"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
         - name: "GCP_CREDENTIALS_PATH"
           valueFrom:
             configMapKeyRef:
               key: "GCP_CREDENTIALS_PATH"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
         - name: "GCP_BUCKET_ID"
           valueFrom:
             configMapKeyRef:
               key: "GCP_BUCKET_ID"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
         - name: "GCP_PROJECT_ID"
           valueFrom:
             configMapKeyRef:
               key: "GCP_PROJECT_ID"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
         - name: "CLOUD_STORAGE_KEY"
           valueFrom:
             configMapKeyRef:
               key: "CLOUD_STORAGE_KEY"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
       - name: "morfius-db"
         image: "mongo:jammy"
         volumeMounts:
@@ -224,18 +238,18 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: "MONGO_INITDB_ROOT_USERNAME"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
         - name: "MONGO_INITDB_ROOT_PASSWORD"
           valueFrom:
             configMapKeyRef:
               key: "MONGO_INITDB_ROOT_PASSWORD"
-              name: "morfius-tutor-config-ygfz"
+              name: "$name-config-map"
         - name: "MONGO_INITDB_DATABASE"
           valueFrom:
             configMapKeyRef:
               key: "MONGO_INITDB_DATABASE"
-              name: "morfius-tutor-config-ygfz"
-      - name: "morfius-tutor-ui"
+              name: "$name-config-map"
+      - name: "$name-ui"
         image: $imagemorfiustutoruiRegistry/$imagemorfiustutoruiRepo:$imagemorfiustutoruiTag
         imagePullPolicy: "Always"
       - name: "nginx"
@@ -276,10 +290,10 @@ spec:
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "morfius-tutor-svc"
+  name: "$name-svc"
   namespace: "$namespace"
   labels:
-    app: "morfius-tutor"
+    app: "$name"
 spec:
   ports:
   - name: "http"
@@ -301,6 +315,6 @@ spec:
     port: 27017
     targetPort: 27017
   selector:
-    app: "morfius-tutor"
+    app: "$name"
   type: "LoadBalancer"
   loadBalancerIP: ""
