@@ -1,6 +1,6 @@
 properties:
   testerImage:
-    default: us-east1-docker.pkg.dev/morfius-platform-402907/morfius-repo/morfius-test:v5
+    default: gcr.io/morfius-platform-402907/morfius-tutor-test:v1
     type: string
   replicas:
     type: integer
