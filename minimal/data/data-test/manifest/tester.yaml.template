@@ -11,6 +11,7 @@ spec:
     containers:
     - name: "test"
       image: "$testerImage"
+      restartPolicy: Never
       env:
       - name: "URL"
         valueFrom:
