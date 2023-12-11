@@ -71,8 +71,6 @@ properties:
     type: string
     title: Database Password
     description: Enter your Database Password
-    x-google-marketplace:
-      type: MASKED_FIELD
 
 
 required:

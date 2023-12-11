@@ -17,12 +17,12 @@ data:
   GCP_CREDENTIALS_PATH: /app/morfius-platform-402907-50044ce985c3.json
   GCP_BUCKET_ID: morfiusstorage
   GCP_PROJECT_ID: morfius-platform-402907
-  URL: http://$name-svc
+  URL: http://morfius-tutor-svc
   INDEX_NAME: "$name"
   CLOUD_STORAGE_KEY: gcp
   MONGO_USER: "$dbUser"
   MONGO_PASSWORD: "$dbPassword"
-  uri: "mongodb://$dbUser:$dbPassword@$name-svc:27017/?authMechanism=DEFAULT"
+  uri: "mongodb://$dbUser:$dbPassword@morfius-tutor-svc:27017/?authMechanism=DEFAULT"
   config.yaml: |
     # The identity section contains authentication information used
     # by the agent.
@@ -165,7 +165,7 @@ spec:
           claimName: morfius-pvc
       - name: ubbagent-config
         configMap:
-          name: ubbagent-config
+          name: "$name-config-map"
       containers:
       - name: "$name-backend"
         image: $imagemorfiustutorbackendRegistry/$imagemorfiustutorbackendRepo:$imagemorfiustutorbackendTag
@@ -278,7 +278,7 @@ spec:
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "$name-svc"
+  name: "morfius-tutor-svc"
   namespace: "$namespace"
   labels:
     app: "$name"
