@@ -162,7 +162,7 @@ spec:
       volumes:
       - name: mongo-persistent-storage
         persistentVolumeClaim:
-          claimName: morfius-pvc
+          claimName: $name-pvc
       - name: ubbagent-config
         configMap:
           name: "$name-config-map"
@@ -267,7 +267,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: morfius-pvc
+  name: $name-pvc
 spec:
   accessModes:
     - ReadWriteOnce
